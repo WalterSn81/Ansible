@@ -1,0 +1,16 @@
+---
+- name: Erstkonfiguration abschließen
+  hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Erstelle die Datei /etc/done.conf
+      copy:
+        dest: /etc/done.conf
+        content: |
+          # VespaOS Setup abgeschlossen
+          status=initialized
+          date={{ ansible_date_time.iso8601 }}
+        mode: '0644'
+        owner: root
+        group: root
