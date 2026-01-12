@@ -1,16 +1,32 @@
 ---
-- name: Erstkonfiguration abschließen
+- name: Ansible running script
   hosts: localhost
   connection: local
   become: yes
   tasks:
+    - name: SD-Card resize
+      command: raspi-config --expand-rootfs
+      register: resize_result
+      changed_when: resize_result.rc == 0
+
+    - name: Other tasks
+      apt:
+        name: [htop, curl, git]
+        state: present
+        update_cache: yes
+
     - name: Erstelle die Datei /etc/done.conf
       copy:
         dest: /etc/done.conf
         content: |
-          # VespaOS Setup abgeschlossen
-          status=initialized
+          # Swarm Eye OS Setup done
+          status=OK
           date={{ ansible_date_time.iso8601 }}
+          resize_triggered=true
         mode: '0644'
         owner: root
         group: root
+
+    - name: System reboot
+      reboot:
+        msg: "Setup done"
