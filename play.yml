@@ -4,14 +4,9 @@
   connection: local
   become: yes
   tasks:
-    - name: SD-Card resize
-      command: raspi-config --expand-rootfs
-      register: resize_result
-      changed_when: resize_result.rc == 0
-
     - name: Other tasks
       apt:
-        name: [htop, curl, git]
+        name: [htop, curl]
         state: present
         update_cache: yes
 
@@ -19,7 +14,7 @@
       copy:
         dest: /etc/done.conf
         content: |
-          # Swarm Eye OS Setup done
+          # Bee guard OS Ansible
           status=OK
           date={{ ansible_date_time.iso8601 }}
           resize_triggered=true
