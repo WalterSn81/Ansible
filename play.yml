@@ -26,7 +26,3 @@
         mode: '0644'
         owner: root
         group: root
-
-    - name: System reboot
-      reboot:
-        msg: "Setup done"
