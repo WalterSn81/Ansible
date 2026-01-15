@@ -12,9 +12,9 @@
 
     - name: Erstelle die Datei /etc/done.conf
       copy:
-        dest: /etc/done.conf
+        dest: /var/log/ansibleFromGit.conf
         content: |
-          # Bee guard OS Ansible
+          ---=== Bee guard OS ===---
           status=OK
           date={{ ansible_date_time.iso8601 }}
           resize_triggered=true
