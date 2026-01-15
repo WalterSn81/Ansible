@@ -4,9 +4,9 @@
   connection: local
   become: yes
   tasks:
-    - name: Other tasks
+    - name: Install neovim
       apt:
-        name: [htop, curl]
+        name: neovim
         state: present
         update_cache: yes
 
