@@ -1,5 +1,5 @@
 ---
-- name: Ansible running script
+- name: Bee guard OS init
   hosts: localhost
   connection: local
   become: yes
@@ -10,14 +10,13 @@
         state: present
         update_cache: yes
 
-    - name: Erstelle die Datei /etc/done.conf
+    - name: Create log file /var/log/bgos_init.log
       copy:
-        dest: /var/log/ansibleFromGit.conf
+        dest: /var/log/ansibleFromGit.log
         content: |
           ---=== Bee guard OS ===---
           status=OK
           date={{ ansible_date_time.iso8601 }}
-          resize_triggered=true
         mode: '0644'
         owner: root
         group: root
